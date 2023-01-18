@@ -221,10 +221,12 @@ void Card::Card_selection(vector<Card>& pocket, int summ) {
 				if (summ <= pocket[i].get_balance()) {
 					pocket[i].set_balance(pocket[i].get_balance() - summ);
 				}
-				else if (summ <= pocket[i].get_limit())
-				{
-					pocket[i].set_limit(pocket[i].get_limit() - summ);
+				else if (summ <= (pocket[i].get_balance()+pocket[i].get_limit())) {
+					pocket[i].set_limit(pocket[i].get_limit()-(summ - pocket[i].get_balance()));
+					pocket[i].set_balance(0);
+
 				}
+				
 				else
 				{
 					cout << "Not enough money";
@@ -292,7 +294,7 @@ Begin:
 			}
 		}
 		if (numb == 3) {
-			cout << "enter the week for the report " << endl;
+			cout << "enter the Month for the report " << endl;
 			int _mohnt;
 			cin >> _mohnt;
 			for (int i = 0; i < mas_cost.size(); i++)
